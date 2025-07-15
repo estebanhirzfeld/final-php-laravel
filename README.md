@@ -3,6 +3,12 @@
 ## Descripción
 Aplicación web desarrollada en PHP (estructura tipo Laravel, pero lógica principal en PHP procedural y PDO) que simula el juego de la galleta de la fortuna. Los usuarios pueden registrarse, iniciar sesión y recibir frases aleatorias. Los administradores pueden gestionar (agregar) nuevas frases.
 
+## Cambios recientes
+- Los controladores `AuthController.php` y `PhraseController.php` ahora están en la carpeta `public/` para ser ejecutados correctamente por el servidor embebido de Laravel.
+- Todos los formularios apuntan a `/AuthController.php` y `/PhraseController.php`.
+- Las rutas relativas de los require_once en los controladores han sido corregidas.
+- La tabla `phrases` debe existir en la base de datos.
+
 ## Requisitos Técnicos
 - **Backend:** PHP (estructura inspirada en Laravel, pero lógica principal en PHP procedural y PDO)
 - **Frontend:** HTML, CSS, AngularJS (usado para mostrar frases sin recargar la página)
@@ -15,10 +21,17 @@ Aplicación web desarrollada en PHP (estructura tipo Laravel, pero lógica princ
 2. **Configurar la base de datos:**
    - Crear una base de datos MySQL (por defecto: `fortune_cookie_db`).
    - Importar el archivo `database/dbb.sql` para crear las tablas y datos de prueba.
+   - Si no existe la tabla `phrases`, créala con:
+     ```sql
+     CREATE TABLE IF NOT EXISTS phrases (
+         id INT AUTO_INCREMENT PRIMARY KEY,
+         text TEXT NOT NULL
+     );
+     ```
 3. **Configurar la conexión:**
-   - Editar los parámetros de conexión en `config/Database.php` según tu entorno.
+   - Editar los parámetros de conexión en `config/utils/database.php` según tu entorno.
 4. **Ejecutar la aplicación:**
-   - Levantar un servidor local apuntando a la carpeta `public/` (por ejemplo, usando XAMPP, MAMP, Laragon, etc.).
+   - Levantar un servidor local apuntando a la carpeta `public/` (por ejemplo, usando XAMPP, MAMP, Laragon, etc.) o usando el servidor embebido de Laravel con `php artisan serve`.
    - Acceder a `index.php` para registrarse o iniciar sesión.
 
 ## Funcionalidades Implementadas
@@ -49,11 +62,16 @@ Aplicación web desarrollada en PHP (estructura tipo Laravel, pero lógica princ
 - Uso de AngularJS para experiencia fluida en el juego.
 - Base de datos y código alineados en inglés.
 - Mensajes de error y éxito mejorados y claros para el usuario.
+- Controladores movidos a `public/` para compatibilidad con el servidor embebido de Laravel.
 
 ## Datos de prueba
 - **Usuarios:**
-  - Admin: `admin@mail.com` / contraseña (hash a definir en la base de datos)
-  - Usuario: `usuario@mail.com` / contraseña (hash a definir en la base de datos)
+  - Admin: `admin@admin.com` / contraseña: `admin` (hash bcrypt)
+  - Usuario: `usuario@mail.com` / contraseña (hash bcrypt)
+  - Puedes convertir cualquier usuario en admin con:
+    ```sql
+    UPDATE users SET role = 'admin' WHERE email = 'usuario@dominio.com';
+    ```
 - **Frases:**
   - Varias frases de ejemplo incluidas en la tabla `phrases`.
 
