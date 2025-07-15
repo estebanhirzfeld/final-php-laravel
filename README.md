@@ -59,7 +59,6 @@ Aplicación web desarrollada en PHP (estructura tipo Laravel, pero lógica princ
 ## Mejoras respecto al parcial anterior
 - Lógica y estructura renombradas a inglés para cumplir estándares y claridad.
 - Separación clara de modelo, vista y controlador.
-- Uso de AngularJS para experiencia fluida en el juego.
 - Base de datos y código alineados en inglés.
 - Mensajes de error y éxito mejorados y claros para el usuario.
 - Controladores movidos a `public/` para compatibilidad con el servidor embebido de Laravel.
@@ -79,6 +78,3 @@ Aplicación web desarrollada en PHP (estructura tipo Laravel, pero lógica princ
 - Si necesitas generar un hash de contraseña para los usuarios de prueba, puedes usar la función `password_hash('tu_contraseña', PASSWORD_BCRYPT)` en PHP.
 - El sistema está preparado para ser extendido fácilmente a vistas Blade o rutas de Laravel si se desea.
 
-## Autoría y entrega
-- Entrega individual/grupal según consigna.
-- Repositorio GitHub y archivo comprimido incluyen todo el código fuente, base de datos y documentación.
